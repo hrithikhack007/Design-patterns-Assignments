@@ -1,5 +1,7 @@
 package net.media.training.designpattern.observer;
 
+import java.util.ArrayList;
+
 /**
  * Created by IntelliJ IDEA.
  * User: joelrosario
@@ -14,11 +16,22 @@ public class Sun {
     private final Dog dog;
     private final Cat cat;
 
+    private ArrayList<Subscriber> subscribers;
+
     public Sun(Robot robot, Person person, Dog dog, Cat cat) {
         this.robot = robot;
         this.person = person;
         this.dog = dog;
         this.cat = cat;
+        subscribers = new ArrayList<Subscriber>();
+        addSubscriber(person);
+        addSubscriber(cat);
+        addSubscriber(dog);
+        addSubscriber(robot);
+    }
+
+    public void addSubscriber(Subscriber subscriber){
+        subscribers.add(subscriber);
     }
 
     public boolean isUp() {
@@ -28,40 +41,20 @@ public class Sun {
     public void set() {
         isUp = false;
 
-        if (robot.isOutdoors()) {
-            robot.notifySunSet();
-        }
-
-        if (person.isOutdoors()) {
-            person.notifySunSet();
-        }
-
-        if (dog.isOutdoors()) {
-            dog.notifySunSet();
-        }
-
-        if (cat.isOutdoors()) {
-            cat.notifySunSet();
+        for(int i = 0; i < subscribers.size();i++){
+            if(subscribers.get(i).isOutdoors()){
+                subscribers.get(i).notifySunSet();
+            }
         }
     }
 
     public void rise() {
         isUp = true;
 
-        if (robot.isOutdoors()) {
-            robot.notifySunRose();
-        }
-
-        if (person.isOutdoors()) {
-            person.notifySunRose();
-        }
-
-        if (dog.isOutdoors()) {
-            dog.notifySunRose();
-        }
-
-        if (cat.isOutdoors()) {
-            cat.notifySunRose();
+        for(int i = 0; i < subscribers.size();i++){
+            if(subscribers.get(i).isOutdoors()){
+                subscribers.get(i).notifySunRose();
+            }
         }
     }
 }

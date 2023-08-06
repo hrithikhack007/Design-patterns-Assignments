@@ -24,6 +24,7 @@ public class SunTestClient {
         this.cat = new Cat();
         this.dog = new Dog();
         this.robot = new Robot();
+
         this.sun = new Sun(robot, person, dog, cat);
     }
 
