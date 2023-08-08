@@ -3,10 +3,15 @@ package net.media.training.designpattern.abstractfactory;
 class IphoneFactory implements PhoneFactory {
 
     @Override
+    public Processor createProcessor(){
+        return new IphoneProcessor();
+    }
+
+    @Override
     public MotherBoard assembleMotherboard(){
       MotherBoard motherBoard = new IphoneMotherBoard();
         motherBoard.attachBattery(new Battery());
-        motherBoard.attachProcessor(new IphoneProcessor());
+        motherBoard.attachProcessor(createProcessor());
         return motherBoard;
     }
     @Override

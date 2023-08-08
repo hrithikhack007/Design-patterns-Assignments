@@ -2,11 +2,15 @@ package net.media.training.designpattern.abstractfactory;
 
  class AndroidFactory implements PhoneFactory{
 
+     public Processor createProcessor(){
+         return new AndroidProcessor();
+     }
+
      @Override
      public MotherBoard assembleMotherboard(){
          MotherBoard motherBoard = new AndroidMotherBoard();
          motherBoard.attachBattery(new Battery());
-         motherBoard.attachProcessor(new AndroidProcessor());
+         motherBoard.attachProcessor(createProcessor());
          return motherBoard;
      }
      @Override

@@ -10,32 +10,18 @@ package net.media.training.designpattern.abstractfactory;
 public class PhoneMaker {
 
     public Case buildPhone(String phoneType) {
-        MotherBoard motherBoard;
+
+        PhoneFactory phoneFactory;
         if (phoneType.equals("Android")) {
-            motherBoard = new AndroidMotherBoard();
-            motherBoard.attachBattery(new Battery());
-            motherBoard.attachProcessor(new AndroidProcessor());
+            phoneFactory = new AndroidFactory();
         } else {
-            motherBoard = new IphoneMotherBoard();
-            motherBoard.attachBattery(new Battery());
-            motherBoard.attachProcessor(new IphoneProcessor());
+            phoneFactory = new IphoneFactory();
         }
 
-        Screen screen;
-        if (phoneType.equals("Android")) {
-            screen = new AndroidScreen();
-        } else {
-            screen = new IphoneScreen();
-        }
-
-        Case phoneCase;
-        if (phoneType.equals("Android")) {
-            phoneCase = new AndroidCase();
-        } else {
-            phoneCase = new IphoneCase();
-        }
-        phoneCase.attachMotherBoard(motherBoard);
-        phoneCase.attachScreen(screen);
+        MotherBoard motherBoard =  phoneFactory.assembleMotherboard();
+        Screen screen = phoneFactory.assembleScreen();
+        Case phoneCase = phoneFactory.assembleCase(motherBoard,screen);
         return phoneCase;
+
     }
 }
