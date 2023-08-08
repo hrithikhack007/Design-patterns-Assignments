@@ -1,4 +1,5 @@
 package net.media.training.designpattern.composite;
+import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,7 +8,7 @@ package net.media.training.designpattern.composite;
  * Time: 9:18:04 PM
  * To change this template use pre_refactoring.File | Settings | pre_refactoring.File Templates.
  */
-public class File {
+public class File implements DataComponent{
     private final String name;
     private int size;
     private Directory parent;
@@ -28,7 +29,9 @@ public class File {
     public int getSize() {
         return size;
     }
-
+    public boolean exist(String name){
+        return Objects.equals(getName(), name);
+    }
     public Directory getParent() {
         return parent;
     }
