@@ -7,10 +7,17 @@ package net.media.training.designpattern.decorator;
  * Time: 10:41:37 AM
  * To change this template use File | Settings | File Templates.
  */
-public class TOEFL extends GPAEval {
+public class TOEFL extends BaseEvaluator {
+
+    public TOEFL(Criteria wrapped){
+        super(wrapped);
+    }
 
     @Override
     public boolean evaluate(Application theApp) {
-        return super.evaluate(theApp) && theApp.getToefl() > 100;
+
+        boolean result =  super.evaluate(theApp) && theApp.getToefl() > 100;
+        System.out.println("Toefl called");
+        return result;
     }
 }

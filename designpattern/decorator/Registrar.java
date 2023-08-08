@@ -14,4 +14,15 @@ public class Registrar {
         return criteria.evaluate(theApp);
     }
 
+    public static void main(String[] args) {
+
+        Application app = new Application(9,330,110);
+
+        Criteria criteria = new TOEFL(new GREEval(new GPAEval()));
+        System.out.println(criteria.evaluate(app));
+
+    }
+
 }
+
+

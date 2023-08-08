@@ -9,7 +9,8 @@ package net.media.training.designpattern.decorator;
  */
 public class GPAEval implements Criteria {
     public boolean evaluate(Application theApp) {
+        boolean result = theApp.getGpa() > 8;
         System.out.println("GPAEval called");
-        return theApp.getGpa() > 8;
+        return result;
     }
 }
